@@ -127,7 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PL.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.vcxproj">
+      <Project>{740b910d-1fd4-4ad1-91f2-a2c571baa3e6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.vcxproj">
+      <Project>{443d0ee7-2e0c-4e94-90a6-901a2c94d898}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
