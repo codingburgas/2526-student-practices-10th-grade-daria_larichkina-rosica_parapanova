@@ -81,7 +81,7 @@ int main() {
         {"Batman"}
     };
 
-    // SEATS (created ONCE → keeps state)
+    
     vector<Seat> seats(5);
     for (int i = 0; i < seats.size(); i++) {
         seats[i].number = i + 1;
@@ -140,6 +140,17 @@ int main() {
         }
 
         // BOOKING LOGIC
+       /* if (seats[seatChoice - 1].booked) {
+            cout << "Seat already booked!\n";
+        }
+        else {
+            seats[seatChoice - 1].booked = true;
+
+            cout << "Booking successful for "
+                << movies[movieChoice - 1].title
+                << " at seat " << seatChoice << endl;
+        }*/
+        // BOOKING LOGIC
         if (seats[seatChoice - 1].booked) {
             cout << "Seat already booked!\n";
         }
@@ -149,6 +160,51 @@ int main() {
             cout << "Booking successful for "
                 << movies[movieChoice - 1].title
                 << " at seat " << seatChoice << endl;
+
+            while (true) {
+                cout << "\n=== NEXT ACTION ===\n";
+                cout << "1. Book another seat\n";
+                cout << "2. Pay\n";
+                cout << "3. Exit\n";
+                cout << "Choice: ";
+
+                int nextChoice;
+                cin >> nextChoice;
+
+                if (nextChoice == 1) {
+                }
+                else if (nextChoice == 2) {
+
+                    // PAYMENT OPTIONS
+                    cout << "\nPayment method:\n";
+                    cout << "1. Cash\n";
+                    cout << "2. Card\n";
+                    cout << "Choice: ";
+
+                    int paymentChoice;
+                    cin >> paymentChoice;
+
+                    if (paymentChoice == 1) {
+                        cout << "You chose to pay with cash.\n";
+                    }
+                    else if (paymentChoice == 2) {
+                        cout << "You chose to pay with card.\n";
+                    }
+                    else {
+                        cout << "Invalid payment option.\n";
+                        continue;
+                    }
+
+                    cout << "Payment successful!\n";
+                }
+                else if (nextChoice == 3) {
+                    cout << "Goodbye!\n";
+                    return 0; 
+                }
+                else {
+                    cout << "Invalid choice!\n";
+                }
+            }
         }
     }
 
