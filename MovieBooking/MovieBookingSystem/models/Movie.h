@@ -4,4 +4,5 @@ using namespace std;
 
 struct Movie {
     string title;
+    double price;
 };

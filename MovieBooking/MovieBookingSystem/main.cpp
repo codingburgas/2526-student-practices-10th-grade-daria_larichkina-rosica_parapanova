@@ -76,12 +76,12 @@ int main() {
 
     // MOVIES
     vector<Movie> movies = {
-        {"Avengers"},
-        {"Frozen"},
-        {"Batman"}
+     {"Avengers", 12.50},
+     {"Frozen", 10.00},
+     {"Batman", 11.50}
     };
 
-    
+    double totalPrice = 0;
     vector<Seat> seats(5);
     for (int i = 0; i < seats.size(); i++) {
         seats[i].number = i + 1;
@@ -156,11 +156,16 @@ int main() {
         }
         else {
             seats[seatChoice - 1].booked = true;
-
+            totalPrice += movies[movieChoice - 1].price;
             cout << "Booking successful for "
                 << movies[movieChoice - 1].title
                 << " at seat " << seatChoice << endl;
 
+            cout << "Ticket price: $"
+                << movies[movieChoice - 1].price << endl;
+
+            cout << "Current total: $"
+                << totalPrice << endl;
             while (true) {
                 cout << "\n=== NEXT ACTION ===\n";
                 cout << "1. Book another seat\n";
@@ -172,6 +177,7 @@ int main() {
                 cin >> nextChoice;
 
                 if (nextChoice == 1) {
+                    break;
                 }
                 else if (nextChoice == 2) {
 
@@ -186,9 +192,13 @@ int main() {
 
                     if (paymentChoice == 1) {
                         cout << "You chose to pay with cash.\n";
+                        cout << "\n===== RECEIPT =====\n";
+                        cout << "Total amount: $" << totalPrice << endl;
                     }
                     else if (paymentChoice == 2) {
                         cout << "You chose to pay with card.\n";
+                        cout << "\n===== RECEIPT =====\n";
+                        cout << "Total amount: $" << totalPrice << endl;
                     }
                     else {
                         cout << "Invalid payment option.\n";
