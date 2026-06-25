@@ -51,13 +51,13 @@ int main() {
         cout << "\n=== MAIN MENU ===\n";
         cout << "1. Book seat\n";
         cout << "2. Search movies\n";
-        cout << "3. Exit\n";
+        cout << "3. Admin\n";
+        cout << "4. Exit\n";
         cout << "Choice: ";
-
         int choice;
         cin >> choice;
 
-        if (choice == 3) {
+        if (choice == 4) {
             cout << "Goodbye!\n";
             break;
         }
@@ -122,7 +122,99 @@ int main() {
 
             continue;
         }
+        if (choice == 3) {
 
+            cout << "\n=== ADMIN MENU ===\n";
+            cout << "1. Add Movie\n";
+            cout << "2. Delete Movie\n";
+            cout << "Choice: ";
+
+            int adminChoice;
+            cin >> adminChoice;
+
+            if (adminChoice == 1) {
+
+                string title;
+                string language;
+                string genre;
+                string releaseDate;
+                double price;
+
+                cin.ignore();
+
+                cout << "Title: ";
+                getline(cin, title);
+
+                cout << "Language: ";
+                getline(cin, language);
+
+                cout << "Genre: ";
+                getline(cin, genre);
+
+                cout << "Release Date: ";
+                getline(cin, releaseDate);
+
+                cout << "Price: ";
+                cin >> price;
+
+                Movie newMovie{
+                    title,
+                    language,
+                    genre,
+                    releaseDate,
+                    price,
+                    vector<Seat>(5)
+                };
+
+                movies.push_back(newMovie);
+                for (int j = 0; j < movies.back().seats.size(); j++) {
+
+                    movies.back().seats[j].number = j + 1;
+
+                    if (j < 2)
+                        movies.back().seats[j].type = SILVER;
+
+                    else if (j < 4)
+                        movies.back().seats[j].type = GOLD;
+
+                    else
+                        movies.back().seats[j].type = PLATINUM;
+                }
+                cout << "Movie added successfully!\n";
+            }
+
+            else if (adminChoice == 2) {
+
+                cout << "\n=== MOVIES ===\n";
+
+                for (int i = 0; i < movies.size(); i++) {
+                    cout << i + 1 << ". "
+                        << movies[i].title
+                        << endl;
+                }
+
+                int deleteChoice;
+
+                cout << "Select movie to delete: ";
+                cin >> deleteChoice;
+
+                if (deleteChoice >= 1 &&
+                    deleteChoice <= movies.size()) {
+
+                    movies.erase(
+                        movies.begin()
+                        + (deleteChoice - 1)
+                    );
+
+                    cout << "Movie deleted!\n";
+                }
+                else {
+                    cout << "Invalid movie!\n";
+                }
+            }
+
+            continue;
+        }
         // MOVIES
         cout << "\n=== Movies ===\n";
         for (int i = 0; i < movies.size(); i++) {
