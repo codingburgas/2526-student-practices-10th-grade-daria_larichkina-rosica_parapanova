@@ -12,17 +12,17 @@ int main() {
     // MOVIES
     vector<Movie> movies = {
     {"Avengers", "English", "Action", "2019", 12.50, vector<Seat>(5)},
-    {"Frozen", "English", "Animation", "2013", 10.00, vector<Seat>(5)},
-    {"Batman", "English", "Action", "2022", 11.50, vector<Seat>(5)},
-    {"Fight Club", "English", "Drama", "1999", 14.50, vector<Seat>(5)},
-    {"Minions", "English", "Animation", "2015", 9.50, vector<Seat>(5)},
+    {"Frozen", "Bulgarian", "Animation", "2013", 10.00, vector<Seat>(5)},
+    {"Batman", "Russian", "Action", "2022", 11.50, vector<Seat>(5)},
+    {"Fight Club", "German", "Drama", "1999", 14.50, vector<Seat>(5)},
+    {"Minions", "Spanish", "Animation", "2015", 9.50, vector<Seat>(5)},
     {"Barbie", "English", "Comedy", "2023", 15.50, vector<Seat>(5)},
     {"Star Wars", "English", "Sci-Fi", "1977", 13.50, vector<Seat>(5)},
-    {"Titanic", "English", "Romance", "1997", 10.50, vector<Seat>(5)},
+    {"Titanic", "Spanish", "Romance", "1997", 10.50, vector<Seat>(5)},
     {"Spiderman", "English", "Action", "2021", 12.50, vector<Seat>(5)},
     {"Interstellar", "English", "Sci-Fi", "2014", 16.50, vector<Seat>(5)},
-    {"Forrest Gump", "English", "Drama", "1994", 11.50, vector<Seat>(5)},
-    {"Moana", "English", "Animation", "2016", 9.50, vector<Seat>(5)},
+    {"Forrest Gump", "Russian", "Drama", "1994", 11.50, vector<Seat>(5)},
+    {"Moana", "Bulgarian", "Animation", "2016", 9.50, vector<Seat>(5)},
     {"The Matrix", "English", "Sci-Fi", "1999", 9.50, vector<Seat>(5)},
     {"Jurassic Park", "English", "Adventure", "1993", 9.50, vector<Seat>(5)},
     {"The Lord of the Rings", "English", "Fantasy", "2001", 13.50, vector<Seat>(5)}
@@ -50,19 +50,76 @@ int main() {
         // MAIN MENU
         cout << "\n=== MAIN MENU ===\n";
         cout << "1. Book seat\n";
-        cout << "2. Exit\n";
+        cout << "2. Search movies\n";
+        cout << "3. Exit\n";
         cout << "Choice: ";
 
         int choice;
         cin >> choice;
 
-        if (choice == 2) {
+        if (choice == 3) {
             cout << "Goodbye!\n";
             break;
         }
 
-        if (choice != 1) {
-            cout << "Invalid choice!\n";
+        
+        if (choice == 2) {
+
+            cout << "\nSearch by:\n";
+            cout << "1. Title\n";
+            cout << "2. Language\n";
+            cout << "3. Genre\n";
+            cout << "4. Release Date\n";
+            cout << "Choice: ";
+
+            int searchChoice;
+            cin >> searchChoice;
+
+            string searchText;
+
+            cout << "Enter search value: ";
+            cin.ignore();
+            getline(cin, searchText);
+
+            cout << "\n=== Results ===\n";
+
+            bool found = false;
+
+            for (int i = 0; i < movies.size(); i++) {
+
+                if (searchChoice == 1 &&
+                    movies[i].title == searchText) {
+
+                    cout << movies[i].title << endl;
+                    found = true;
+                }
+
+                else if (searchChoice == 2 &&
+                    movies[i].language == searchText) {
+
+                    cout << movies[i].title << endl;
+                    found = true;
+                }
+
+                else if (searchChoice == 3 &&
+                    movies[i].genre == searchText) {
+
+                    cout << movies[i].title << endl;
+                    found = true;
+                }
+
+                else if (searchChoice == 4 &&
+                    movies[i].releaseDate == searchText) {
+
+                    cout << movies[i].title << endl;
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                cout << "No movies found.\n";
+            }
+
             continue;
         }
 
@@ -145,7 +202,7 @@ int main() {
                         << totalPrice << endl;
                     while (true) {
                         cout << "\n=== NEXT ACTION ===\n";
-                        cout << "1. Book another seat\n";
+                        cout << "1. Main menu\n";
                         cout << "2. Pay\n";
                         cout << "3. Exit\n";
                         cout << "Choice: ";
