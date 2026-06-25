@@ -1,69 +1,4 @@
-﻿//#include <iostream>
-//#include <vector>
-//
-//#include "models/Movie.h"
-//#include "models/Seat.h"
-//
-//using namespace std;
-//
-//int main() {
-//
-//    // Movies
-//    vector<Movie> movies = {
-//        {"Avengers"},
-//        {"Frozen"},
-//        {"Batman"}
-//    };
-//
-//    cout << "=== Movies ===\n";
-//    for (int i = 0; i < movies.size(); i++) {
-//        cout << i + 1 << ". " << movies[i].title << endl;
-//    }
-//
-//    int movieChoice;
-//    cout << "\nSelect movie (1-3): ";
-//    cin >> movieChoice;
-//
-//    if (movieChoice < 1 || movieChoice > movies.size()) {
-//        cout << "Invalid choice!\n";
-//        return 0;
-//    }
-//
-//    // Seats
-//    vector<Seat> seats(5);
-//    for (int i = 0; i < seats.size(); i++) {
-//        seats[i].number = i + 1;
-//    }
-//
-//    cout << "\n=== Seats ===\n";
-//    for (auto& s : seats) {
-//        cout << "Seat " << s.number
-//            << (s.booked ? " (Booked)" : " (Available)") << endl;
-//    }
-//
-//    int seatChoice;
-//    cout << "\nPick seat (1-5): ";
-//    cin >> seatChoice;
-//
-//    if (seatChoice < 1 || seatChoice > seats.size()) {
-//        cout << "Invalid seat!\n";
-//        return 0;
-//    }
-//
-
-//    // Booking logic
-//    if (seats[seatChoice - 1].booked) {
-//        cout << "Seat already booked!\n";
-//    }
-//    else {
-//        seats[seatChoice - 1].booked = true;
-//        cout << "Booking successful for "
-//            << movies[movieChoice - 1].title
-//            << " at seat " << seatChoice << endl;
-//    }
-//
-//    return 0;
-//}
+﻿
 #include <iostream>
 #include <vector>
 
@@ -78,7 +13,19 @@ int main() {
     vector<Movie> movies = {
     {"Avengers", 12.50, vector<Seat>(5)},
     {"Frozen", 10.00, vector<Seat>(5)},
-    {"Batman", 11.50, vector<Seat>(5)}
+    {"Batman", 11.50, vector<Seat>(5)},
+    {"Fight Club", 14.50, vector<Seat>(5)},
+    {"Minions", 9.50, vector<Seat>(5)},
+    {"Barbie", 15.50, vector<Seat>(5)},
+    {"Star Wars", 13.50, vector<Seat>(5)},
+    {"Titanic", 10.50, vector<Seat>(5)},
+    {"Spiderman", 12.50, vector<Seat>(5)},
+    {"Interstellar", 16.50, vector<Seat>(5)},
+    {"Forrest Gump", 11.50, vector<Seat>(5)},
+    {"Moana", 9.50, vector<Seat>(5)},
+    {"The Matrix", 9.50, vector<Seat>(5)},
+    {"Jurassic Park", 9.50, vector<Seat>(5)},
+    {"The Lord of the Rings", 13.50, vector<Seat>(5)},
     };
     for (int i = 0; i < movies.size(); i++) {
         for (int j = 0; j < movies[i].seats.size(); j++) {
@@ -145,18 +92,6 @@ int main() {
                     continue;
                 }
 
-                // BOOKING LOGIC
-               /* if (seats[seatChoice - 1].booked) {
-                    cout << "Seat already booked!\n";
-                }
-                else {
-                    seats[seatChoice - 1].booked = true;
-
-                    cout << "Booking successful for "
-                        << movies[movieChoice - 1].title
-                        << " at seat " << seatChoice << endl;
-                }*/
-                // BOOKING LOGIC
                 if (movies[movieChoice - 1].seats[seatChoice - 1].booked) {
                     cout << "Seat already booked!\n";
                 }
