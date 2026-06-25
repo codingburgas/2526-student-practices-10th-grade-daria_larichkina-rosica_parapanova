@@ -30,6 +30,10 @@ int main() {
     for (int i = 0; i < movies.size(); i++) {
         for (int j = 0; j < movies[i].seats.size(); j++) {
             movies[i].seats[j].number = j + 1;
+
+            if (j >= 3) { // Seats 4 and 5
+                movies[i].seats[j].vip = true;
+            }
         }
     }
     double totalPrice = 0;
@@ -74,11 +78,17 @@ int main() {
         // SEATS
         cout << "\n=== Seats ===\n";
         for (int i = 0; i < movies[movieChoice - 1].seats.size(); i++) {
+
             cout << "Seat "
-                << movies[movieChoice - 1].seats[i].number
-                << (movies[movieChoice - 1].seats[i].booked
-                    ? " (Booked)"
-                    : " (Available)")
+                << movies[movieChoice - 1].seats[i].number;
+
+            if (movies[movieChoice - 1].seats[i].vip) {
+                cout << " (VIP)";
+            }
+
+            cout << (movies[movieChoice - 1].seats[i].booked
+                ? " (Booked)"
+                : " (Available)")
                 << endl;
         }
 
@@ -97,13 +107,20 @@ int main() {
                 }
                 else {
                     movies[movieChoice - 1].seats[seatChoice - 1].booked = true; 
-                    totalPrice += movies[movieChoice - 1].price;
+                    double ticketPrice = movies[movieChoice - 1].price;
+
+                    if (movies[movieChoice - 1].seats[seatChoice - 1].vip) {
+                        ticketPrice += 5.00;
+                    }
+
+                    totalPrice += ticketPrice;
+
                     cout << "Booking successful for "
                         << movies[movieChoice - 1].title
                         << " at seat " << seatChoice << endl;
 
                     cout << "Ticket price: $"
-                        << movies[movieChoice - 1].price << endl;
+                        << ticketPrice << endl;
 
                     cout << "Current total: $"
                         << totalPrice << endl;
