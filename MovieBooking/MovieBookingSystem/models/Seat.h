@@ -1,7 +1,13 @@
 #pragma once
 
+enum SeatType {
+    SILVER,
+    GOLD,
+    PLATINUM
+};
+
 struct Seat {
     int number;
     bool booked = false;
-    bool vip = false;   // NEW
+    SeatType type;
 };

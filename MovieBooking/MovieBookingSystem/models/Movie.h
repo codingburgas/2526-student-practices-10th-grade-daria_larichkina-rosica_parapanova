@@ -6,6 +6,10 @@ using namespace std;
 
 struct Movie {
     string title;
+    string language;
+    string genre;
+    string releaseDate;
+
     double price;
     vector<Seat> seats;
 };

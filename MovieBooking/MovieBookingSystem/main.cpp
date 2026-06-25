@@ -11,29 +11,35 @@ int main() {
 
     // MOVIES
     vector<Movie> movies = {
-    {"Avengers", 12.50, vector<Seat>(5)},
-    {"Frozen", 10.00, vector<Seat>(5)},
-    {"Batman", 11.50, vector<Seat>(5)},
-    {"Fight Club", 14.50, vector<Seat>(5)},
-    {"Minions", 9.50, vector<Seat>(5)},
-    {"Barbie", 15.50, vector<Seat>(5)},
-    {"Star Wars", 13.50, vector<Seat>(5)},
-    {"Titanic", 10.50, vector<Seat>(5)},
-    {"Spiderman", 12.50, vector<Seat>(5)},
-    {"Interstellar", 16.50, vector<Seat>(5)},
-    {"Forrest Gump", 11.50, vector<Seat>(5)},
-    {"Moana", 9.50, vector<Seat>(5)},
-    {"The Matrix", 9.50, vector<Seat>(5)},
-    {"Jurassic Park", 9.50, vector<Seat>(5)},
-    {"The Lord of the Rings", 13.50, vector<Seat>(5)},
+    {"Avengers", "English", "Action", "2019", 12.50, vector<Seat>(5)},
+    {"Frozen", "English", "Animation", "2013", 10.00, vector<Seat>(5)},
+    {"Batman", "English", "Action", "2022", 11.50, vector<Seat>(5)},
+    {"Fight Club", "English", "Drama", "1999", 14.50, vector<Seat>(5)},
+    {"Minions", "English", "Animation", "2015", 9.50, vector<Seat>(5)},
+    {"Barbie", "English", "Comedy", "2023", 15.50, vector<Seat>(5)},
+    {"Star Wars", "English", "Sci-Fi", "1977", 13.50, vector<Seat>(5)},
+    {"Titanic", "English", "Romance", "1997", 10.50, vector<Seat>(5)},
+    {"Spiderman", "English", "Action", "2021", 12.50, vector<Seat>(5)},
+    {"Interstellar", "English", "Sci-Fi", "2014", 16.50, vector<Seat>(5)},
+    {"Forrest Gump", "English", "Drama", "1994", 11.50, vector<Seat>(5)},
+    {"Moana", "English", "Animation", "2016", 9.50, vector<Seat>(5)},
+    {"The Matrix", "English", "Sci-Fi", "1999", 9.50, vector<Seat>(5)},
+    {"Jurassic Park", "English", "Adventure", "1993", 9.50, vector<Seat>(5)},
+    {"The Lord of the Rings", "English", "Fantasy", "2001", 13.50, vector<Seat>(5)}
     };
     for (int i = 0; i < movies.size(); i++) {
         for (int j = 0; j < movies[i].seats.size(); j++) {
+
             movies[i].seats[j].number = j + 1;
 
-            if (j >= 3) { // Seats 4 and 5
-                movies[i].seats[j].vip = true;
-            }
+            if (j < 2)
+                movies[i].seats[j].type = SILVER;
+
+            else if (j < 4)
+                movies[i].seats[j].type = GOLD;
+
+            else
+                movies[i].seats[j].type = PLATINUM;
         }
     }
     double totalPrice = 0;
@@ -77,14 +83,20 @@ int main() {
 
         // SEATS
         cout << "\n=== Seats ===\n";
+
         for (int i = 0; i < movies[movieChoice - 1].seats.size(); i++) {
 
             cout << "Seat "
                 << movies[movieChoice - 1].seats[i].number;
 
-            if (movies[movieChoice - 1].seats[i].vip) {
-                cout << " (VIP)";
-            }
+            if (movies[movieChoice - 1].seats[i].type == SILVER)
+                cout << " (Silver)";
+
+            else if (movies[movieChoice - 1].seats[i].type == GOLD)
+                cout << " (Gold)";
+
+            else
+                cout << " (Platinum)";
 
             cout << (movies[movieChoice - 1].seats[i].booked
                 ? " (Booked)"
@@ -109,9 +121,16 @@ int main() {
                     movies[movieChoice - 1].seats[seatChoice - 1].booked = true; 
                     double ticketPrice = movies[movieChoice - 1].price;
 
-                    if (movies[movieChoice - 1].seats[seatChoice - 1].vip) {
-                        ticketPrice += 5.00;
-                    }
+                    SeatType type =
+                        movies[movieChoice - 1].seats[seatChoice - 1].type;
+
+                    if (type == GOLD)
+                        ticketPrice += 5;
+
+                    else if (type == PLATINUM)
+                        ticketPrice += 10;
+
+                    
 
                     totalPrice += ticketPrice;
 
@@ -139,31 +158,49 @@ int main() {
                         }
                         else if (nextChoice == 2) {
 
-                            // PAYMENT OPTIONS
-                            cout << "\nPayment method:\n";
-                            cout << "1. Cash\n";
-                            cout << "2. Card\n";
+                            cout << "\nBooking type:\n";
+                            cout << "1. Online\n";
+                            cout << "2. Walk-in\n";
                             cout << "Choice: ";
 
-                            int paymentChoice;
-                            cin >> paymentChoice;
+                            int bookingType;
+                            cin >> bookingType;
 
-                            if (paymentChoice == 1) {
-                                cout << "You chose to pay with cash.\n";
+                            // payment logic goes here
+
+                            // PAYMENT OPTIONS
+                            if (bookingType == 1) {
+
+                                cout << "Online customers must pay by card.\n";
+
                                 cout << "\n===== RECEIPT =====\n";
                                 cout << "Total amount: $" << totalPrice << endl;
+
+                                cout << "Payment successful!\n";
                             }
-                            else if (paymentChoice == 2) {
-                                cout << "You chose to pay with card.\n";
+                            else if (bookingType == 2) {
+
+                                cout << "\nPayment method:\n";
+                                cout << "1. Cash\n";
+                                cout << "2. Card\n";
+                                cout << "Choice: ";
+
+                                int paymentChoice;
+                                cin >> paymentChoice;
+
+                                if (paymentChoice != 1 && paymentChoice != 2) {
+                                    cout << "Invalid payment option.\n";
+                                    continue;
+                                }
+
                                 cout << "\n===== RECEIPT =====\n";
                                 cout << "Total amount: $" << totalPrice << endl;
+
+                                cout << "Payment successful!\n";
                             }
                             else {
-                                cout << "Invalid payment option.\n";
-                                continue;
+                                cout << "Invalid booking type.\n";
                             }
-
-                            cout << "Payment successful!\n";
                         }
                         else if (nextChoice == 3) {
                             cout << "Goodbye!\n";
